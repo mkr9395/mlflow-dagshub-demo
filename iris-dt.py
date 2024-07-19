@@ -1,10 +1,10 @@
 import mlflow
 import mlflow.sklearn
 from sklearn.datasets import load_iris
-from sklaen.tree import DecisionTree
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score,confusion_matrix,f1_score,recall_score,precision_score
-import matplotlib.pyplot as pyplot
+import matplotlib.pyplot as plt
 import seaborn as sns
 
 # connect to dagshub
@@ -31,7 +31,7 @@ mlflow.set_experiment('iris-dt')
 
 with mlflow.start_run():
     
-    dt = DecisionTreeModel(max_depth=max_depth)
+    dt = DecisionTreeClassifier(max_depth=max_depth)
     dt.fit(X_train, y_train)
     
     y_pred = dt.predict(X_test)
@@ -51,7 +51,7 @@ with mlflow.start_run():
     plt.title('Confusion Matrix')
     
     # save the plot as an artifact
-    plt.save("confusion_matrix.png")
+    plt.savefig("confusion_matrix.png")
     
     # mlflow code:
     
